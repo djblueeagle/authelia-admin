@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-//version 0.1
+#version 0.1
 def main(msg):
-    //second comment
+    #second comment
     print(msg)
 
 def secondary():
