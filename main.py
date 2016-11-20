@@ -2,6 +2,7 @@
 
 //version 0.1
 def main(msg):
+    //second comment
     print(msg)
 
 def secondary():
