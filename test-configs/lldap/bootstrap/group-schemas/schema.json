@@ -1,0 +1,9 @@
+[
+    {
+        "name": "description",
+        "attributeType": "STRING",
+        "isEditable": false,
+        "isList": false,
+        "isVisible": true
+    }
+]

@@ -1,14 +1,47 @@
-import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-import tailwindcss from '@tailwindcss/vite'
-import path from 'path'
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [tailwindcss(), svelte()],
-  resolve: {
-    alias: {
-      '$lib': path.resolve('./src/lib')
-    }
-  }
-})
+	plugins: [tailwindcss(), sveltekit()],
+	server: {
+		host: true,
+		allowedHosts: true,
+		port: 9093,
+		strictPort: true,
+		// // Disable HMR for production preview
+		// hmr: process.env.NODE_ENV === 'production' ? false : {
+		// 	port: 9094,
+		// 	host: 'localhost'
+		// }
+	},
+	build: {
+		rollupOptions: {
+			// Keep native modules external but bundle the rest
+			external: ['sqlite3', 'ldapts'],
+			output: {
+				// Inline dynamic imports to reduce chunk count
+				inlineDynamicImports: true,
+				// Single bundle for server
+				manualChunks: undefined
+			}
+		},
+		// Increase chunk size limit to allow bundling
+		chunkSizeWarningLimit: 2000,
+		// Bundle all dependencies except native ones
+		commonjsOptions: {
+			include: [/node_modules/],
+			transformMixedEsModules: true
+		}
+	},
+	ssr: {
+		// Bundle non-native dependencies
+		noExternal: ['yaml'],
+		// Keep native modules external
+		external: ['sqlite3', 'ldapts'],
+		// Optimize deps for development
+		optimizeDeps: {
+			include: ['yaml']
+		}
+	}
+});

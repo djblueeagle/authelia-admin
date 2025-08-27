@@ -1,0 +1,15 @@
+{
+  "id": "bind_user",
+  "email": "binduser@localhost.test",
+  "password": "binduser1234",
+  "displayName": "Bind User",
+  "firstName": "First",
+  "lastName": "Last",
+  "gravatar_avatar": "false",
+  "weserv_avatar": "false",
+  "groups": [
+    "admins",
+    "lldap_admin",
+    "cloud"
+  ]
+}

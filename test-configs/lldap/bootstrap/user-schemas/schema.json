@@ -1,0 +1,23 @@
+[
+    {
+        "name": "telegram",
+        "attributeType": "STRING",
+        "isEditable": true,
+        "isList": false,
+        "isVisible": true
+    },
+    {
+        "name": "gidnumber",
+        "attributeType": "INTEGER",
+        "isEditable": true,
+        "isList": false,
+        "isVisible": true
+    },
+    {
+        "name": "uidnumber",
+        "attributeType": "INTEGER",
+        "isEditable": true,
+        "isList": false,
+        "isVisible": true
+    }
+]

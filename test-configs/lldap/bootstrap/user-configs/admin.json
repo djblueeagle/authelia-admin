@@ -1,0 +1,15 @@
+{
+  "id": "admin",
+  "email": "admin@localhost.test",
+  "password": "admin1234",
+  "displayName": "Admin",
+  "firstName": "First",
+  "lastName": "Last",
+  "gravatar_avatar": "false",
+  "weserv_avatar": "false",
+  "groups": [
+    "admins",
+    "lldap_admin",
+    "cloud"
+  ]
+}

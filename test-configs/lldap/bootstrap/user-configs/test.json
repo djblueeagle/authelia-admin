@@ -1,0 +1,13 @@
+{
+  "id": "test",
+  "email": "test@localhost.test",
+  "password": "test1234",
+  "displayName": "Test User",
+  "firstName": "First",
+  "lastName": "Last",
+  "gravatar_avatar": "false",
+  "weserv_avatar": "false",
+  "groups": [
+    "cloud"
+  ]
+}

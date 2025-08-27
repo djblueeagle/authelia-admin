@@ -1,4 +1,126 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* Custom CSS variables and utilities */
+:root {
+	--background: 0 0% 100%;
+	--foreground: 0 0% 3.9%;
+	--muted: 0 0% 96.1%;
+	--muted-foreground: 0 0% 45.1%;
+	--popover: 0 0% 100%;
+	--popover-foreground: 0 0% 3.9%;
+	--card: 0 0% 100%;
+	--card-foreground: 0 0% 3.9%;
+	--border: 0 0% 89.8%;
+	--input: 0 0% 89.8%;
+	--primary: 0 0% 9%;
+	--primary-foreground: 0 0% 98%;
+	--secondary: 0 0% 96.1%;
+	--secondary-foreground: 0 0% 9%;
+	--accent: 0 0% 96.1%;
+	--accent-foreground: 0 0% 9%;
+	--destructive: 0 84.2% 60.2%;
+	--destructive-foreground: 0 0% 98%;
+	--ring: 0 0% 3.9%;
+	--radius: 0.5rem;
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: 0 0% 3.9%;
+		--foreground: 0 0% 98%;
+		--muted: 0 0% 14.9%;
+		--muted-foreground: 0 0% 63.9%;
+		--popover: 0 0% 3.9%;
+		--popover-foreground: 0 0% 98%;
+		--card: 0 0% 3.9%;
+		--card-foreground: 0 0% 98%;
+		--border: 0 0% 14.9%;
+		--input: 0 0% 14.9%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 9%;
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 0 0% 98%;
+		--ring: 0 0% 83.1%;
+	}
+}
+
+/* Base styles */
+* {
+	border-color: hsl(var(--border));
+}
+
+body {
+	background-color: hsl(var(--background));
+	color: hsl(var(--foreground));
+}
+
+/* Component specific styles */
+nav div[data-portal] {
+	display: none;
+}
+
+.landing-container {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
+
+.split {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: inherit;
+	width: 100%;
+	height: .5px;
+}
+
+/* Svelecte component styles */
+div.svelecte {
+	border-color: hsl(var(--input));
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+div.svelecte * {
+	font-size: 0.875rem;
+	color: hsl(var(--accent-foreground));
+}
+
+/* Svelecte CSS variables */
+:root {
+	--sv-border: 1px solid #e5e7eb;
+	--sv-border-radius: 6px;
+	--sv-min-height: 2.25rem;
+	--sv-icon-size: 16px;
+	--sv-loader-border: 1px solid #e5e7eb;
+	--sv-separator-bg: #e5e7eb;
+	--sv-general-padding: 6px;
+	--sv-item-wrap-padding: 4px 4px 4px 6px;
+}
+
+/* Link styles */
+.gray-link {
+	color: rgb(75 85 99);
+}
+
+.gray-link:hover {
+	text-decoration: underline;
+	color: rgb(37 99 235);
+}
+
+.regular-link {
+	color: rgb(37 99 235);
+}
+
+.regular-link:hover {
+	text-decoration: underline;
+	color: rgb(37 99 235);
+}
+
+.link:hover {
+	text-decoration: underline;
+	color: rgb(37 99 235);
+}

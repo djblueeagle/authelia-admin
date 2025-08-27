@@ -4,15 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev --host --port 9093",
     "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
+    "preview": "HOST=0.0.0.0 PORT=9093 node build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
+    "@sveltejs/adapter-node": "^5.3.1",
+    "@sveltejs/kit": "^2.36.2",
     "@sveltejs/vite-plugin-svelte": "^6.1.1",
     "@tailwindcss/vite": "^4.1.12",
     "@tsconfig/svelte": "^5.0.4",
+    "@types/ldapjs": "^3.0.6",
+    "serve": "^14.2.4",
     "svelte": "^5.38.1",
     "svelte-check": "^4.3.1",
     "tailwindcss": "^4.1.12",
@@ -20,10 +25,8 @@
     "vite": "^7.1.2"
   },
   "dependencies": {
-    "bits-ui": "^1.0.0-next.82",
-    "clsx": "^2.1.1",
-    "shadcn-svelte": "^1.0.7",
-    "tailwind-merge": "^3.3.1",
-    "tw-animate-css": "^1.3.7"
+    "ldapts": "^8.0.9",
+    "sqlite3": "^5.1.7",
+    "yaml": "^2.8.1"
   }
 }
