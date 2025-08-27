@@ -2,6 +2,8 @@
 
 A web-based administration interface for managing Authelia authentication server.
 
+![image](https://raw.githubusercontent.com/asalimonov/authelia-admin/refs/heads/main/public/authelia-admin.gif)
+
 ## Features
 
 - View and manage TOTP configurations
