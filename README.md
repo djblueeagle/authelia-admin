@@ -1,18 +1,24 @@
-# Authelia Admin
+# Authelia Admin Control Panel
 
 A web-based administration interface for managing Authelia authentication server.
 
 ## Features
 
 - View and manage TOTP configurations
-- View TOTP history (replay attack prevention logs)
+- View TOTP history
 - Manage banned users and IPs
-- Browse and manage LDAP users and groups
+- Browse LDAP users and groups (LLDAP limitation)
 - Change user passwords via LDAP
+
+### Not yet implemented
+
+- Management users via LDAP
+- PostgreSQL engine for Authelia
+- Browse and management of users in Authelia file provider
 
 ## Configuration
 
-### Environment Variables
+### Optional environment variables
 
 - `PORT` - Server port (default: 9093)
 - `HOST` - Server host (default: 0.0.0.0)
@@ -21,7 +27,7 @@ A web-based administration interface for managing Authelia authentication server
 ### Docker
 
 ```bash
-docker build -t authelia-admin .
+make build
 docker run -p 9093:9093 \
   -v /path/to/authelia/config:/config \
   -v /path/to/authelia/data:/data \
@@ -35,14 +41,14 @@ See `docker-compose.yml` for a complete example with Authelia, LLDAP, and Traefi
 ### Development
 
 ```bash
-# Install dependencies
-npm install
+# Install dependencies and build docker image
+make build-dev
 
-# Run development server
-npm run dev
+# Run Authelia, LLDAP, Traefik in docker compose in the second terminal
+make docker-compose-run
 
-# Build for production
-npm run build
+# Run Docker with authelia-admin with hot-reload
+make run-dev
 ```
 
 ## Requirements
@@ -53,5 +59,8 @@ npm run build
 - LDAP server (e.g., LLDAP) configured in Authelia
 
 ## Security Notes
+
+>[!IMPORTANT]
+Due to the age and experimental nature of the project, I don't recommend using it for public deployment or for installations with many users.
 
 This application requires administrative access to Authelia's configuration and database. It should be deployed behind proper authentication and only accessible by authorized administrators.
