@@ -20,11 +20,16 @@ A web-based administration interface for managing Authelia authentication server
 
 ## Configuration
 
+- `AUTHELIA_DOMAIN` env var - domain of authelia server for authentication of requests
+- `TRUSTED_ORIGINS` env var for Node application, example: `https://{{ AUTHELIA_DOMAIN }}`
+- Configure load balancer, Authelia Admin CP should be on `https://{{AUTHELIA_DOMAIN}}/auth-admin/`
+
 ### Optional environment variables
 
 - `PORT` - Server port (default: 9093)
 - `HOST` - Server host (default: 0.0.0.0)
 - `AUTHELIA_CONFIG_PATH` - Path to Authelia configuration file (default: `/config/configuration.yml`)
+- `ALLOWED_USERS` - List of allowed users separated by comma (`,`), (default: `admin`)
 
 ### Docker
 
