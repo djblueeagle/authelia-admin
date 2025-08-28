@@ -77,7 +77,7 @@
 							User: <span class="font-semibold">{data.user.username}</span>
 						</span>
 						<a 
-							href="https://auth.localhost.test/logout"
+							href="/logout"
 							class="px-3 py-1.5 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
 						>
 							Logout
