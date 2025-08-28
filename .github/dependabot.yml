@@ -1,0 +1,75 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+    open-pull-requests-limit: 10
+    groups:
+      svelte:
+        patterns:
+          - "@sveltejs/*"
+          - "svelte*"
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      vite:
+        patterns:
+          - "vite*"
+          - "@vitejs/*"
+      types:
+        patterns:
+          - "@types/*"
+        update-types:
+          - "patch"
+          - "minor"
+    ignore:
+      # Ignore major version updates for core dependencies
+      - dependency-name: "svelte"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@sveltejs/kit"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "javascript"
+    reviewers:
+      - "asalimonov"
+
+  # Enable version updates for Docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+    commit-message:
+      prefix: "docker"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "docker"
+    reviewers:
+      - "asalimonov"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    reviewers:
+      - "asalimonov"

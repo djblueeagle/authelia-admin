@@ -8,13 +8,13 @@ A web-based administration interface for managing Authelia authentication server
 
 - View and manage TOTP configurations
 - View TOTP history
-- Manage banned users and IPs
-- Browse LDAP users and groups (LLDAP limitation)
+- Managemenent of banned users and IPs
+- Browse LDAP users and groups (due to LLDAP limitation)
 - Change user passwords via LDAP
 
 ### Not yet implemented
 
-- Management users via LDAP
+- Management of users via LDAP
 - PostgreSQL engine for Authelia
 - Browse and management of users in Authelia file provider
 
@@ -30,6 +30,7 @@ A web-based administration interface for managing Authelia authentication server
 - `HOST` - Server host (default: 0.0.0.0)
 - `AUTHELIA_CONFIG_PATH` - Path to Authelia configuration file (default: `/config/configuration.yml`)
 - `ALLOWED_USERS` - List of allowed users separated by comma (`,`), (default: `admin`)
+- `NODE_TLS_REJECT_UNAUTHORIZED=0` in case of self-signed certificate for Authelia, or mount volume `/etc/ssl/certs/:/etc/ssl/certs/:ro` in Docker
 
 ### Docker
 
