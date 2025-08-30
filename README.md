@@ -26,8 +26,6 @@ A web-based administration interface for managing Authelia authentication server
 
 ### Optional environment variables
 
-- `PORT` - Server port (default: 9093)
-- `HOST` - Server host (default: 0.0.0.0)
 - `AUTHELIA_CONFIG_PATH` - Path to Authelia configuration file (default: `/config/configuration.yml`)
 - `ALLOWED_USERS` - List of allowed users separated by comma (`,`), (default: `admin`)
 - `NODE_TLS_REJECT_UNAUTHORIZED=0` in case of self-signed certificate for Authelia, or mount volume `/etc/ssl/certs/:/etc/ssl/certs/:ro` in Docker
@@ -35,11 +33,10 @@ A web-based administration interface for managing Authelia authentication server
 ### Docker
 
 ```bash
-make build
 docker run -p 9093:9093 \
   -v /path/to/authelia/config:/config \
   -v /path/to/authelia/data:/data \
-  authelia-admin
+  ghcr.io/asalimonov/authelia-admin:latest
 ```
 
 ### Docker Compose
@@ -58,6 +55,8 @@ make docker-compose-run
 # Run Docker with authelia-admin with hot-reload
 make run-dev
 ```
+
+Use `admin` user with `admin1234` password. Confirmation code is `./test-data/authelia/notification.txt` file.
 
 ## Requirements
 

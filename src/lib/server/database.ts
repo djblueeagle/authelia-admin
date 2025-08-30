@@ -60,6 +60,7 @@ export interface DatabaseAdapter {
     getBannedIPs(): Promise<BannedIP[]>;
     createBannedIP(ip: string, expires: Date | null, source: string, reason: string | null): Promise<boolean>;
     deleteBannedIP(id: number): Promise<boolean>;
+    healthCheck(): Promise<void>;
     close(): Promise<void>;
 }
 
@@ -68,19 +69,26 @@ class SQLiteAdapter implements DatabaseAdapter {
     private dbAll: (sql: string, params?: any[]) => Promise<any[]>;
     private dbClose: () => Promise<void>;
 
-    constructor(dbPath: string) {
-        this.db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
-            if (err) {
-                console.error('Error opening database:', err);
-                throw err;
-            }
-        });
-        
+    private constructor(db: sqlite3.Database) {
+        this.db = db;
         // Configure SQLite for better concurrency with Authelia
         this.db.configure('busyTimeout', 5000); // Wait up to 5 seconds if database is locked
         
         this.dbAll = promisify(this.db.all.bind(this.db));
         this.dbClose = promisify(this.db.close.bind(this.db));
+    }
+
+    static async create(dbPath: string): Promise<SQLiteAdapter> {
+        return new Promise((resolve, reject) => {
+            const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
+                if (err) {
+                    console.error('Error opening database:', err);
+                    reject(err);
+                } else {
+                    resolve(new SQLiteAdapter(db));
+                }
+            });
+        });
     }
     
     // Custom dbRun that returns the statement info with changes
@@ -264,6 +272,17 @@ class SQLiteAdapter implements DatabaseAdapter {
         }
     }
 
+    async healthCheck(): Promise<void> {
+        const query = `SELECT 1`;
+        
+        try {
+            await this.dbAll(query);
+        } catch (error) {
+            console.error('Database health check failed:', error);
+            throw error;
+        }
+    }
+
     async close(): Promise<void> {
         await this.dbClose();
     }
@@ -310,6 +329,10 @@ class PostgreSQLAdapter implements DatabaseAdapter {
         throw new Error('PostgreSQL support not yet implemented');
     }
 
+    async healthCheck(): Promise<void> {
+        throw new Error('PostgreSQL support not yet implemented');
+    }
+
     async close(): Promise<void> {
         throw new Error('PostgreSQL support not yet implemented');
     }
@@ -317,7 +340,7 @@ class PostgreSQLAdapter implements DatabaseAdapter {
 
 export async function getDatabaseConfig(): Promise<DatabaseConfig | null> {
     try {
-        const configPath = '/config/configuration.yml';
+        const configPath = process.env.AUTHELIA_CONFIG_PATH || '/config/configuration.yml';
         const configContent = await fs.readFile(configPath, 'utf-8');
         const config = parse(configContent);
         
@@ -352,7 +375,7 @@ export async function createDatabaseAdapter(config: DatabaseConfig): Promise<Dat
             if (!config.path) {
                 throw new Error('SQLite database path is required');
             }
-            return new SQLiteAdapter(config.path);
+            return await SQLiteAdapter.create(config.path);
         case 'postgres':
             if (!config.connectionString) {
                 throw new Error('PostgreSQL connection string is required');

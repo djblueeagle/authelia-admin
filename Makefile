@@ -57,6 +57,7 @@ stop: ## Stop and remove Docker container
 docker-compose-run: network ## Run docker-compose with external network
 	mkdir -p ./.test-data/lldap
 	cp ./test-configs/lldap/lldap_config.toml ./.test-data/lldap
+	(sleep 5 && docker compose exec -T lldap /bootstrap/bootstrap.sh) &
 	docker-compose up
 
 .PHONY: all
@@ -74,7 +75,7 @@ clean: ## Clean up Docker images and local files
 	rm -rf ./node_modules
 	rm -rf ./package-lock.json
 	rm -rf ./build
-	rm -rf /.svelte-kit
+	rm -rf ./.svelte-kit
 
 .PHONY: help
 help:	## Print help
