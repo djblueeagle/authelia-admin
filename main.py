@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#version 0.1
+#version master
 def main(msg):
     #second comment
     print(msg)
